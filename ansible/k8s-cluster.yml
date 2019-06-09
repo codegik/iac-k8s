@@ -1,0 +1,9 @@
+- hosts: k8s-cluster
+  sudo: true
+  vars:
+    AWS_ACCESS_KEY: "{{AWS_ACCESS_KEY}}"
+    AWS_SECRET_KEY: "{{AWS_SECRET_KEY}}"
+    AWS_DEFAULT_REGION: "{{AWS_DEFAULT_REGION}}"
+  tasks:
+    - name: Install kubectl with snap
+      shell: sudo snap install kubectl --classic
