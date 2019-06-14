@@ -5,5 +5,13 @@
     AWS_SECRET_KEY: "{{AWS_SECRET_KEY}}"
     AWS_DEFAULT_REGION: "{{AWS_DEFAULT_REGION}}"
   tasks:
+    - name: Get kubectl version
+      command: kubectl version
+      register: kubectl_version
+      ignore_errors: yes
+    - name: Show kubectl version
+      debug:
+        var: kubectl_version
     - name: Install kubectl with snap
       shell: sudo snap install kubectl --classic
+      when: 'kubectl_version.changed == false'
